@@ -2,28 +2,32 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Simulación Brazo Robótico 2DOF</title>
+    <title>Demo Brazo Robótico - En Vivo en Navegador</title>
+    <!-- Loader actual de CheerpJ (2025) -->
     <script src="https://cjrtnc.leaningtech.com/4.2/loader.js"></script>
+    <style>
+        body { font-family: Arial; text-align: center; margin: 20px; }
+        #display { border: 2px solid #333; margin: 20px auto; }
+    </style>
 </head>
 <body>
-    <h1>Simulación Brazo Robótico (2 DOF)</h1>
-    <p>Cargando la aplicación... (primera vez tarda un poco, sé paciente)</p>
+    <h1>Simulación Brazo Robótico (2 DOF) con Java Swing</h1>
+    <p>Cargando... (primera vez descarga ~15-30 MB, luego rápido)</p>
     
+    <!-- Contenedor para la app Swing -->
     <div id="display"></div>
 
     <script>
-        // Quita logo y mensajes de CheerpJ
-        window.cheerpjDisplayOptions = {
-            splashScreen: false,
-            statusBar: false
-        };
-
-        cheerpjInit().then(() => {
-            cheerpjCreateDisplay(900, 700, document.getElementById("display")).then(() => {
-                cheerpjRunMain("PanelC", "/app/ROBOT2GDL.jar");
-                // Si tu .jar está en carpeta dist, cambia a: "/app/dist/ROBOT2GDL.jar"
-            });
-        });
+        async function iniciarApp() {
+            // Inicializa CheerpJ
+            await cheerpjInit();
+            
+            // Crea el display (ajusta tamaño a tu ventana Swing, ej: 800x600)
+            const display = await cheerpjCreateDisplay(800, 600, document.getElementById("display"));
+           
+            cheerpjRunMain("PanelC", "/app/dist/ROBOT2GDL.jar");
+        }
+        iniciarApp();
     </script>
 </body>
 </html>
